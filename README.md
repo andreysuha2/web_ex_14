@@ -1,0 +1,1 @@
+Use app/seeds.py for create users and contacts. Then you can get emails and passwords from users.csv
