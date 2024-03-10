@@ -31,7 +31,7 @@ routers = [auth_router, user_router, contacts_router]
 [app.include_router(router, prefix=BASE_URL_PREFIX) for router in routers]
 
 @app.get('/')
-def read_root():
+def read_root() -> None:
     return {"message": "Contact app!"}
     
     

@@ -8,14 +8,44 @@ class AuthController:
     base_model = User
 
     async def get_user(self, email: str, db: Session) -> base_model | None:
+        """
+        Retrieves a single user with the specified email.
+
+        :param email: The email of the user to retrieve.
+        :type email: str
+        :param db: The database session.
+        :type db: Session
+        :return: The user with the specified email, or None if it does not exist.
+        :rtype: User | None
+        """
         return db.query(self.base_model).filter(self.base_model.email == email).first()
     
     async def comfirm_email(self, email, db: Session) -> None:
+        """
+        Add flag as confirmed user
+
+        :param email: The email of the user who should be confirmed.
+        :type email: str
+        :param db: The database session.
+        :type db: Session
+        :return: None.
+        :rtype: None
+        """
         user = await self.get_user(email, db)
         user.confirmed_at = datetime.now()
         db.commit()
     
     async def create(self, body: schemas.UserCreationModel, db: Session) -> base_model:
+        """
+        Creates a new user.
+
+        :param body: The data for the user to create.
+        :type body: UserCreationModel
+        :param db: The database session.
+        :type db: Session
+        :return: The newly created user.
+        :rtype: User
+        """
         avatar = None
         try:
             g = Gravatar(body.email)
