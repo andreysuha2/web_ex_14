@@ -11,3 +11,7 @@ class TestAuthControllers(unittest.IsolatedAsyncioTestCase):
 
     def test_get_user(self):
         user = User()
+
+
+if __name__ == "__main__":
+    unittest.main()
