@@ -8,14 +8,14 @@ class UserCreationModel(BaseModel):
     email: EmailStr
     password: str = Field(min_length=6)
 
-class UserModer(BaseModel):
+class UserModel(BaseModel):
     id: int
     username: str
     email: EmailStr
     avatar: str
     created_at: datetime
 
-class UserResponse(UserModer):
+class UserResponse(UserModel):
     contacts: List[ContactResponse]
 
     class Config:
