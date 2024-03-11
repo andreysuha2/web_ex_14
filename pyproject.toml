@@ -26,6 +26,7 @@ fastapi-limiter = "^0.1.6"
 redis = "^5.0.2"
 cloudinary = "^1.39.0"
 sphinx = "^7.2.6"
+pytest = "^8.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
