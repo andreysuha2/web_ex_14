@@ -27,6 +27,7 @@ redis = "^5.0.2"
 cloudinary = "^1.39.0"
 sphinx = "^7.2.6"
 pytest = "^8.1.1"
+pytest-mock = "^3.12.0"
 
 
 [tool.poetry.group.dev.dependencies]
