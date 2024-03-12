@@ -35,5 +35,12 @@ def client(session: Session):
     yield TestClient(app)
 
 @pytest.fixture(scope="module")
-def user():
-    return {"username": "ironman", "email": "tony.stark@mail.com", "password": "123123123"}
+def contact():
+    return {
+        "first_name": "Toney",
+        "last_name": "Stark",
+        "email": "iron@man.com",
+        "phone": "+38077777777",
+        "birthday": "01-01-1980",
+        "addtitional_data": "I am IronMan"
+    }
