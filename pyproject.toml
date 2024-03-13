@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "0.109.0"
+fastapi = "0.104.1"
 uvicorn = {extras = ["standard"], version = "^0.27.0.post1"}
 sqlalchemy = "^2.0.25"
 psycopg2 = "^2.9.9"
@@ -29,7 +29,7 @@ sphinx = "^7.2.6"
 pytest = "^8.1.1"
 pytest-mock = "^3.12.0"
 httpx = "^0.27.0"
-anyio = "^4.3.0"
+anyio = "3.7.1"
 
 
 [tool.poetry.group.dev.dependencies]

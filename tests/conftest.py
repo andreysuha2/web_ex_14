@@ -4,6 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from app.main import app
 from app.db import Base, get_db
+from users.models import User
+from users.auth import auth
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
@@ -30,9 +32,20 @@ def client(session: Session):
         finally:
             session.close()
 
-    app.dependency_overrides[get_db] = override_get_db
+    def override_auth():
+        user = session.query(User).filter(User.id == 1).first()
+        if user is None:
+            user = User(username="Thanos", email="thanos@stones.five", password=auth.password.hash("123123123"))
+            session.add(user)
+            session.commit()
+            session.refresh(user)
+        return user
 
-    yield TestClient(app)
+    app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[auth] = override_auth
+
+    with TestClient(app) as client:
+        yield client
 
 @pytest.fixture(scope="module")
 def contact():
@@ -40,7 +53,15 @@ def contact():
         "first_name": "Toney",
         "last_name": "Stark",
         "email": "iron@man.com",
-        "phone": "+38077777777",
-        "birthday": "01-01-1980",
+        "phone": "+14155552671",
+        "birthday": "1980-01-01",
         "addtitional_data": "I am IronMan"
+    }
+
+@pytest.fixture(scope="module")
+def updated_contact():
+    return {
+        "first_name": "Thor",
+        "last_name": "Odinson",
+        "additional_data": "Mijolnir is power"
     }

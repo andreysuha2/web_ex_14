@@ -38,12 +38,12 @@ async def read_contact(user: AuthDep, controller: ContactControllerDep, db: DBCo
 async def update_contact(user: AuthDep, controller: ContactControllerDep, db: DBConnectionDep, body: schemas.ContactModel, contact_id: int):
     contact = await controller.update(user=user, id=contact_id, body=body, db=db)
     if contact is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
     return contact
 
 @router.delete('/{contact_id}', response_model=schemas.ContactResponse)
 async def delete_contact(user: AuthDep, controller: ContactControllerDep, db: DBConnectionDep, contact_id: int):
     contact = await controller.delete(user=user, id=contact_id, db=db)
     if contact is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
     return contact
